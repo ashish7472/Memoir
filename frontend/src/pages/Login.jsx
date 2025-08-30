@@ -36,14 +36,14 @@ const Login = () => {
           Log in to access your account
         </p>
         <p className="text-lg font-semibold text-center">
-          and continue your journey with DayBook.
+          and continue your journey with Memoir.
         </p>
       </div>
       <div className="flex justify-center px-7 my-10">
         <div className="card card-xl bg-base-200 w-full max-w-sm rounded-2xl shadow-xl hover:shadow-2xl">
           <div className="card-body">
             <h2 className="card-title block text-center text-lg mb-2">
-              Log in to DayBook
+              Log in to Memoir
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="text-sm">
@@ -83,7 +83,7 @@ const Login = () => {
                   className="btn btn-primary w-full rounded-lg my-3"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Logging in..." : "Log in"}
+                  {isLoading ? "Logging in..." : "Log in to Memoir"}
                 </button>
               </div>
             </form>

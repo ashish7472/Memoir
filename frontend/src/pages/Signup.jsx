@@ -47,7 +47,7 @@ const Signup = () => {
     <div className="min-h-[calc(100svh-64px-52px-40px)]">
       <div className="my-10">
         <p className="text-lg font-semibold text-center">
-          Create your DayBook account
+          Create your Memoir account
         </p>
         <p className="text-lg font-semibold text-center">
           and stay organized effortlessly.
@@ -57,80 +57,75 @@ const Signup = () => {
         <div className="card card-xl bg-base-200 w-full max-w-sm rounded-2xl shadow-xl hover:shadow-2xl">
           <div className="card-body">
             <h2 className="card-title block text-center text-lg mb-2">
-              Sign up to DayBook
+              Sign up to Memoir
             </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="text-sm">
-                <div>
-                  <label htmlFor="firstname">
-                    First Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="firstname"
-                    type="text"
-                    className="input w-full rounded-lg my-3"
-                    placeholder="Enter your first name"
-                    onChange={handleChange}
-                    name="firstName"
-                    value={formData.firstName}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="lastname">Last Name</label>
-                  <input
-                    id="lastname"
-                    type="text"
-                    className="input w-full rounded-lg my-3"
-                    placeholder="Optional"
-                    onChange={handleChange}
-                    name="lastName"
-                    value={formData.lastName}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email">
-                    Email <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className="input w-full rounded-lg my-3"
-                    placeholder="Email address"
-                    onChange={handleChange}
-                    name="email"
-                    value={formData.email}
-                    required
-                    autoComplete="on"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="password">
-                    Password <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="password"
-                    type="password"
-                    className="input w-full rounded-lg my-3"
-                    placeholder="Password"
-                    onChange={handleChange}
-                    name="password"
-                    value={formData.password}
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary w-full rounded-lg my-3"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Signing up..." : "Sign up"}
-                </button>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                />
               </div>
+
+              <div>
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-focus focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
+              >
+                {isLoading ? "Creating account..." : "Sign up to Memoir"}
+              </button>
             </form>
 
             <div className="text-center text-sm">

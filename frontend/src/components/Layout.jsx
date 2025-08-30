@@ -71,7 +71,7 @@ const Layout = () => {
               onClick={toggle}
             >
               <img className="w-10 h-10" src={logo} alt="logo" />
-              DayBook
+              Memoir
             </Link>
           </div>
           <SearchBox toggle={toggle} />

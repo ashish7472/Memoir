@@ -1,7 +1,7 @@
 {
-  "name": "daybook",
+  "name": "memoir",
   "version": "1.0.0",
-  "description": "A MERN stack application to manage daily journals and tasks",
+  "description": "A MERN stack application to manage daily journals and personal memoirs",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index",
@@ -9,21 +9,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thenileshnishad/daybook.git"
+    "url": "git+https://github.com/ashish7472/Memoir.git"
   },
   "keywords": [
     "mern",
-    "daybook",
+    "memoir",
     "journal",
-    "task",
+    "diary",
+    "personal",
     "management"
   ],
-  "author": "Nilesh Kumar Nishad",
+  "author": "Ashish Rolan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thenileshnishad/daybook/issues"
+    "url": "https://github.com/ashish7472/Memoir/issues"
   },
-  "homepage": "https://github.com/thenileshnishad/daybook#readme",
+  "homepage": "https://github.com/ashish7472/Memoir#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",

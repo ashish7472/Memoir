@@ -1,14 +1,13 @@
 const About = () => {
   return (
-    <div className="flex justify-center px-4 sm:px-6 lg:px-10 my-10">
-      <div className="w-full max-w-3xl bg-base-200 shadow-xl hover:shadow-2xl rounded-3xl p-6 md:p-8">
-        <h1 className="text-3xl font-bold text-center mb-7">About DayBook</h1>
-        <p className="text-lg text-center mb-4">
-          DayBook is a secure and trusted digital journal that protects your
-          thoughts and memories. Built for simplicity and reliability, it allows
-          you to document your experiences with ease. DayBook prioritizes
-          privacy and a distraction-free experience, ensuring your journaling
-          stays personal, secure, and meaningful.
+    <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
+      <div className="max-w-4xl w-full bg-base-200 rounded-lg shadow-lg p-6 sm:p-8">
+        <h1 className="text-4xl font-bold text-center mb-6">About Memoir</h1>
+        
+        <p className="text-lg text-center mb-6">
+          Memoir is your personal digital sanctuary for capturing life's precious moments, 
+          thoughts, and experiences. Built with privacy and simplicity in mind, it ensures your 
+          memories stay personal, secure, and meaningful.
         </p>
 
         <div className="divider"></div>
@@ -19,14 +18,14 @@ const About = () => {
             <span>✅</span>
             <span>
               <strong>Write & Manage Entries:</strong> Effortlessly create,
-              edit, and delete daybook entries while keeping them safe.
+              edit, and delete personal memoir entries while keeping them safe.
             </span>
           </li>
           <li className="flex items-start gap-2">
             <span>📅</span>
             <span>
               <strong>Track Your Memories:</strong> Capture experiences from any
-              date, ensuring your journey is well-documented.
+              date, ensuring your life journey is well-documented.
             </span>
           </li>
           <li className="flex items-start gap-2">
@@ -39,7 +38,7 @@ const About = () => {
           <li className="flex items-start gap-2">
             <span>🔒</span>
             <span>
-              <strong>Advanced Security Features:</strong> Protect your daybook
+              <strong>Advanced Security Features:</strong> Protect your memoir
               entries with encrypted authentication, strong passwords, and
               secure cookies.
             </span>
@@ -89,13 +88,13 @@ const About = () => {
         <div className="divider"></div>
 
         <p className="text-lg text-center">
-          Start your journaling journey with <strong>DayBook</strong> - where
+          Start your journaling journey with <strong>Memoir</strong> - where
           your memories are <strong>secure</strong>, <strong>personal</strong>,
           and always accessible.
         </p>
 
         <div className="text-center mt-5">
-          <a href="https://github.com/thenileshnishad/daybook" target="_blank">
+          <a href="https://github.com/ashish7472/Memoir" target="_blank">
             <button className="btn btn-primary">
               Explore the Code on GitHub
             </button>
