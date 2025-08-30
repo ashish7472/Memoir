@@ -12,9 +12,9 @@ const Profile = ({ close }) => {
 
   useEffect(() => {
     if (user) {
-      setEmail(user?.data?.email);
-      setFirstName(user?.data?.firstName);
-      setLastName(user?.data?.lastName);
+      setEmail(user?.email);
+      setFirstName(user?.firstName);
+      setLastName(user?.lastName);
     }
   }, [user, close]);
 

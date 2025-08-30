@@ -13,8 +13,8 @@ const Password = ({ close }) => {
 
   useEffect(() => {
     if (user) {
-      setEmail(user?.data?.email);
-      setFirstName(user?.data?.firstName);
+      setEmail(user?.email);
+      setFirstName(user?.firstName);
     }
   }, [user]);
 

@@ -11,18 +11,27 @@ import SearchBox from "./navbar/SearchBox";
 import logo from "../assets/logo.svg";
 
 const Layout = () => {
-  const { data: profile, isError, isLoading } = useProfileQuery(undefined, {
-    skip: true // Skip the query initially
-  });
   const dispatch = useDispatch();
   const [isReady, setIsReady] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const toggle = () => setIsDrawerOpen(!isDrawerOpen);
 
+  const { data: profile, isError, isLoading } = useProfileQuery(undefined, {
+    skip: false // Always try to check authentication
+  });
+
   useEffect(() => {
-    // Only set ready state immediately, don't fetch profile here
-    setIsReady(true);
-  }, []);
+    if (!isLoading) {
+      if (profile) {
+        // User is authenticated, set user info
+        dispatch(userInfo(profile));
+      } else if (isError) {
+        // User is not authenticated, clear user info
+        dispatch(removeUserInfo());
+      }
+      setIsReady(true);
+    }
+  }, [profile, dispatch, isError, isLoading]);
 
   if (!isReady) {
     const getTheme = localStorage.getItem("theme")

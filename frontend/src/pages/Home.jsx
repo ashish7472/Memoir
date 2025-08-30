@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const user = useSelector((state) => state.user);
+
   return (
     <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
       <div className="max-w-5xl w-full text-center">
@@ -16,16 +19,26 @@ const Home = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/signup">
-              <button className="px-8 py-3 bg-primary text-primary-content font-medium rounded-lg hover:bg-primary-focus transition-colors duration-200 shadow-sm">
-                Get Started
-              </button>
-            </Link>
-            <Link to="/login">
-              <button className="px-8 py-3 border border-base-content/20 text-base-content font-medium rounded-lg hover:bg-base-200 transition-colors duration-200">
-                Sign In
-              </button>
-            </Link>
+            {user ? (
+              <Link to="/entries">
+                <button className="px-8 py-3 bg-primary text-primary-content font-medium rounded-lg hover:bg-primary-focus transition-colors duration-200 shadow-sm">
+                  View My Entries
+                </button>
+              </Link>
+            ) : (
+              <>
+                <Link to="/signup">
+                  <button className="px-8 py-3 bg-primary text-primary-content font-medium rounded-lg hover:bg-primary-focus transition-colors duration-200 shadow-sm">
+                    Get Started
+                  </button>
+                </Link>
+                <Link to="/login">
+                  <button className="px-8 py-3 border border-base-content/20 text-base-content font-medium rounded-lg hover:bg-base-200 transition-colors duration-200">
+                    Sign In
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
