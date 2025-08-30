@@ -1,17 +1,16 @@
 <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Outer circle with white fill and a thick #8B5CF6 border -->
-  <circle cx="100" cy="100" r="90" fill="#ffffff" stroke="#8B5CF6" stroke-width="20" />
+  <!-- Simple circle background -->
+  <circle cx="100" cy="100" r="90" fill="currentColor" class="text-primary" />
   
-  <!-- "M" text in #8B5CF6 using Montserrat font, centered, italicized, and underlined -->
+  <!-- "M" text in white -->
   <text x="100" y="100"
         text-anchor="middle"
         dominant-baseline="middle"
-        fill="#8B5CF6"
-        font-family="Montserrat, sans-serif"
-        font-size="90"
-        font-weight="bold"
-        font-style="italic"
-        style="text-decoration: underline;">
+        fill="white"
+        font-family="Inter, system-ui, sans-serif"
+        font-size="80"
+        font-weight="800"
+        letter-spacing="-2">
     M
   </text>
 </svg>
