@@ -1,12 +1,12 @@
 import ModalLayout from "../ModalLayout";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import { useAddEntryMutation } from "../../redux/api/entriesApiSlice";
+import { entriesAPI } from "../../api/entries";
 import { toast } from "react-toastify";
 
 const AddEntry = () => {
   const [open, setOpen] = useState(false);
-  const [addEntry, { isLoading }] = useAddEntryMutation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -35,12 +35,17 @@ const AddEntry = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await addEntry(formData).unwrap();
+      const response = await entriesAPI.createEntry(formData);
       setOpen(false);
       toast.success(response.message);
+      // Refresh the page to show the new entry
+      window.location.reload();
     } catch (error) {
-      toast.error(error.data?.message || "An error occurred");
+      toast.error(error.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
     }
   };
 

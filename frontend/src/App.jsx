@@ -1,9 +1,8 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./redux/store";
 import { ToastContainer } from "react-toastify";
+import { UserProvider } from "./context/UserContext";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -15,7 +14,7 @@ import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <UserProvider>
       <BrowserRouter>
         <ToastContainer />
         <Routes>
@@ -29,7 +28,7 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
-    </Provider>
+    </UserProvider>
   );
 };
 export default App;

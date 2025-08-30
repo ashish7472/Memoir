@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { Link, Navigate, replace, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../redux/api/usersApiSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { userInfo } from "../redux/features/userSlice";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { authAPI } from "../api/auth";
+import { useUser } from "../context/UserContext";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const user = useSelector((state) => state.user);
+  const { user, login } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
 
   if (user) {
     return <Navigate to="/" replace />;
@@ -19,13 +17,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await login({ email, password }).unwrap();
-      dispatch(userInfo(response));
-      navigate("/", replace);
+      const response = await authAPI.login({ email, password });
+      login(response);
+      navigate("/");
       toast.success(`Welcome back, ${response.data.firstName}`);
     } catch (error) {
-      toast.error(error?.data?.message || "An unexpected error occurred!");
+      toast.error(error.message || "An unexpected error occurred!");
+    } finally {
+      setIsLoading(false);
     }
   };
 

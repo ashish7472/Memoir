@@ -1,15 +1,13 @@
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
-import {
-  useGetEntriesQuery,
-  useSearchEntryQuery,
-} from "../redux/api/entriesApiSlice";
+import { entriesAPI } from "../api/entries";
+import { useUser } from "../context/UserContext";
 import EntryCard from "../components/entry/EntryCard";
 import AddEntry from "../components/entry/AddEntry";
 import Loader from "../components/Loader";
 
 const Entries = () => {
-  const user = useSelector((state) => state.user);
+  const { user } = useUser();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
 
@@ -17,17 +15,32 @@ const Entries = () => {
     return <Navigate to="/login" replace />;
   }
 
-  const { data: getEntries, isLoading: isLoadingEntries } = useGetEntriesQuery(
-    undefined,
-    { skip: searchQuery.length > 0 }
-  );
+  const [entries, setEntries] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { data: searchResult, isLoading: isLoadingSearch } =
-    useSearchEntryQuery(searchQuery, {
-      skip: searchQuery.length === 0,
-    });
+  useEffect(() => {
+    const fetchEntries = async () => {
+      setIsLoading(true);
+      try {
+        if (searchQuery.length > 0) {
+          const result = await entriesAPI.searchEntries(searchQuery);
+          setEntries(result.data || []);
+        } else {
+          const result = await entriesAPI.getEntries();
+          setEntries(result.data || []);
+        }
+      } catch (error) {
+        console.error('Failed to fetch entries:', error);
+        setEntries([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  if (isLoadingEntries || isLoadingSearch) {
+    fetchEntries();
+  }, [searchQuery]);
+
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[calc(100dvh-64px-52px)]">
         <Loader />
@@ -35,11 +48,8 @@ const Entries = () => {
     );
   }
 
-  const entries =
-    searchQuery.length > 0 ? searchResult?.data || [] : getEntries?.data || [];
-
   if (entries.length === 0) {
-    if (searchResult) {
+    if (searchQuery.length > 0) {
       return (
         <div className="text-center mt-10 mx-7 min-h-[calc(100dvh-64px-52px-40px)]">
           <p className="text-2xl font-semibold mb-2">

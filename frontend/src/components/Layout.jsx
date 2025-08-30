@@ -1,39 +1,19 @@
 import Navbar from "./navbar/Navbar";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "./Footer";
-import { useEffect, useState } from "react";
-import { useProfileQuery } from "../redux/api/usersApiSlice";
-import { useDispatch } from "react-redux";
-import { removeUserInfo, userInfo } from "../redux/features/userSlice";
+import { useState } from "react";
+import { useUser } from "../context/UserContext";
 import Loader from "./Loader";
 import NavLinks from "./navbar/NavLinks";
 import SearchBox from "./navbar/SearchBox";
 import logo from "../assets/logo.svg";
 
 const Layout = () => {
-  const dispatch = useDispatch();
-  const [isReady, setIsReady] = useState(false);
+  const { isLoading } = useUser();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const toggle = () => setIsDrawerOpen(!isDrawerOpen);
 
-  const { data: profile, isError, isLoading } = useProfileQuery(undefined, {
-    skip: false // Always try to check authentication
-  });
-
-  useEffect(() => {
-    if (!isLoading) {
-      if (profile) {
-        // User is authenticated, set user info
-        dispatch(userInfo(profile));
-      } else if (isError) {
-        // User is not authenticated, clear user info
-        dispatch(removeUserInfo());
-      }
-      setIsReady(true);
-    }
-  }, [profile, dispatch, isError, isLoading]);
-
-  if (!isReady) {
+  if (isLoading) {
     const getTheme = localStorage.getItem("theme")
       ? localStorage.getItem("theme")
       : "dark";

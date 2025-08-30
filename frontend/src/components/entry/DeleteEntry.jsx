@@ -1,19 +1,24 @@
 import ModalLayout from "../ModalLayout";
 import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import { useDeleteEntryMutation } from "../../redux/api/entriesApiSlice";
+import { entriesAPI } from "../../api/entries";
 import { toast } from "react-toastify";
 
 const DeleteEntry = ({ id }) => {
   const [open, setOpen] = useState(false);
-  const [deleteEntry, { isLoading }] = useDeleteEntryMutation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
+    setIsLoading(true);
     try {
-      const response = await deleteEntry(id).unwrap();
+      const response = await entriesAPI.deleteEntry(id);
       toast.success(response.message);
+      // Refresh the page to show the updated entries
+      window.location.reload();
     } catch (error) {
       toast.error("Failed to delete the entry!");
+    } finally {
+      setIsLoading(false);
     }
   };
 

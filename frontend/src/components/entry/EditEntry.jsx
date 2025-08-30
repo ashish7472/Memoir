@@ -1,20 +1,13 @@
 import ModalLayout from "../ModalLayout";
 import { FaPencilAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import {
-  useGetEntryQuery,
-  useUpdateEntryMutation,
-} from "../../redux/api/entriesApiSlice";
+import { entriesAPI } from "../../api/entries";
 import { toast } from "react-toastify";
 
 const EditEntry = ({ id }) => {
   const [open, setOpen] = useState(false);
-  const { data: getEntry, isLoading: entryLoading } = useGetEntryQuery(id, {
-    skip: !open,
-  });
-  const [updateEntry, { isLoading: entryUpdating }] = useUpdateEntryMutation();
-
-  const isLoading = entryLoading || entryUpdating;
+  const [entry, setEntry] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -32,24 +25,38 @@ const EditEntry = ({ id }) => {
   };
 
   useEffect(() => {
-    if (getEntry) {
-      setFormData({
-        title: getEntry.data?.title || "",
-        mood: getEntry.data?.mood || "",
-        content: getEntry.data?.content || "",
-        date: new Date(getEntry.data?.date).toISOString().slice(0, 10) || "",
-      });
+    if (open && id) {
+      const fetchEntry = async () => {
+        try {
+          const result = await entriesAPI.getEntry(id);
+          setEntry(result.data);
+          setFormData({
+            title: result.data?.title || "",
+            mood: result.data?.mood || "",
+            content: result.data?.content || "",
+            date: new Date(result.data?.date).toISOString().slice(0, 10) || "",
+          });
+        } catch (error) {
+          console.error('Failed to fetch entry:', error);
+        }
+      };
+      fetchEntry();
     }
-  }, [getEntry]);
+  }, [open, id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await updateEntry({ id, data: formData }).unwrap();
+      const response = await entriesAPI.updateEntry(id, formData);
       setOpen(false);
       toast.success(response.message);
+      // Refresh the page to show the updated entry
+      window.location.reload();
     } catch (error) {
-      toast.error(error.data.message);
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 

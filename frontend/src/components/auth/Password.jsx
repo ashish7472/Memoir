@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useChangePasswordMutation } from "../../redux/api/usersApiSlice";
+import { authAPI } from "../../api/auth";
+import { useUser } from "../../context/UserContext";
 import { toast } from "react-toastify";
 
 const Password = ({ close }) => {
-  const user = useSelector((state) => state.user);
+  const { user } = useUser();
 
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -23,19 +23,21 @@ const Password = ({ close }) => {
     setNewPassword("");
   }, [close]);
 
-  const [changePassword, { isLoading }] = useChangePasswordMutation();
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await changePassword({
+      const response = await authAPI.changePassword({
         oldPassword,
         newPassword,
-      }).unwrap();
+      });
       toast.success(response?.message);
       close();
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 

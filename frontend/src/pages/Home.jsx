@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useUser } from "../context/UserContext";
 
 const Home = () => {
-  const user = useSelector((state) => state.user);
+  const { user } = useUser();
 
   return (
     <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">

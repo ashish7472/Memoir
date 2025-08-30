@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useUpdateProfileMutation } from "../../redux/api/usersApiSlice";
+import { userAPI } from "../../api/user";
+import { useUser } from "../../context/UserContext";
 import { toast } from "react-toastify";
 
 const Profile = ({ close }) => {
-  const user = useSelector((state) => state.user);
+  const { user, updateUser } = useUser();
 
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -18,15 +18,19 @@ const Profile = ({ close }) => {
     }
   }, [user, close]);
 
-  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await updateProfile({ firstName, lastName }).unwrap();
+      const response = await userAPI.updateProfile({ firstName, lastName });
+      updateUser(response.data);
       toast.success(response.message);
       close();
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 

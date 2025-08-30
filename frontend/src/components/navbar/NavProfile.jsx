@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaChevronDown, FaUser, FaSignOutAlt, FaLock } from "react-icons/fa";
 import ModalLayout from "../ModalLayout";
@@ -6,9 +5,10 @@ import { useState } from "react";
 import Profile from "../auth/Profile";
 import Password from "../auth/Password";
 import Logout from "../auth/Logout";
+import { useUser } from "../../context/UserContext";
 
 const NavProfile = () => {
-  const user = useSelector((state) => state.user);
+  const { user } = useUser();
   const [openProfile, setOpenProfile] = useState(false);
   const [openPassword, setOpenPassword] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
