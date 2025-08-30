@@ -12,7 +12,8 @@ const authMiddleware = async (req, res, next) => {
 
   if (token) {
     try {
-      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      const JWT_SECRET = process.env.JWT_SECRET || "your_default_jwt_secret_key_change_in_production";
+      const decode = jwt.verify(token, JWT_SECRET);
       const user = await User.findById(decode._id);
 
       if (!user) {

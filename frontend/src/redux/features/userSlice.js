@@ -5,7 +5,8 @@ const userSlice = createSlice({
   initialState: null,
   reducers: {
     userInfo: (state, action) => {
-      return action.payload;
+      // Store the user data from the response
+      return action.payload.data || action.payload;
     },
     removeUserInfo: () => {
       return null;

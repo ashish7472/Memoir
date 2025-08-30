@@ -43,7 +43,7 @@ const Entries = () => {
       return (
         <div className="text-center mt-10 mx-7 min-h-[calc(100dvh-64px-52px-40px)]">
           <p className="text-2xl font-semibold mb-2">
-            Sorry {user.data.firstName}, I couldn't find any entries matching
+            Sorry {user.firstName}, I couldn't find any entries matching
             your search query!
           </p>
           <p className="text-lg">
@@ -59,7 +59,7 @@ const Entries = () => {
       return (
         <div className="text-center mt-10 mx-7 min-h-[calc(100dvh-64px-52px-40px)]">
           <p className="text-2xl font-semibold mb-2">
-            Welcome, {user.data.firstName}
+            Welcome, {user.firstName}
           </p>
           <p className="text-lg mb-2">
             It looks like you haven't added any entries yet.

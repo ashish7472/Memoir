@@ -25,7 +25,7 @@ const NavProfile = () => {
       {user ? (
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-primary">
-            {user.data.firstName}
+            {user.firstName}
             <FaChevronDown />
           </div>
           <ul className="menu dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
