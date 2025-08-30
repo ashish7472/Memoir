@@ -7,7 +7,7 @@ const cors = require("cors");
 
 // Set default values for environment variables
 const PORT = process.env.PORT || 3000;
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://memoirf.netlify.app";
 
 app.use(express.json());
 app.use(cookieParser());
