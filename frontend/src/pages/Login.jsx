@@ -30,70 +30,64 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[calc(100dvh-64px-52px-40px)]">
-      <div className="my-10">
-        <p className="text-lg font-semibold text-center">
-          Log in to access your account
-        </p>
-        <p className="text-lg font-semibold text-center">
-          and continue your journey with Memoir.
-        </p>
-      </div>
-      <div className="flex justify-center px-7 my-10">
-        <div className="card card-xl bg-base-200 w-full max-w-sm rounded-2xl shadow-xl hover:shadow-2xl">
-          <div className="card-body">
-            <h2 className="card-title block text-center text-lg mb-2">
-              Log in to Memoir
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="text-sm">
-                <div>
-                  <label htmlFor="email">
-                    Email <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className="input w-full rounded-lg my-3"
-                    placeholder="Enter email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    required
-                    autoComplete="on"
-                  />
-                </div>
+    <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
+      <div className="max-w-md w-full">
+        <div className="bg-base-200 rounded-xl p-8 shadow-lg">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-base-content mb-2">Welcome Back</h1>
+            <p className="text-base-content/70">
+              Sign in to continue your journey with Memoir
+            </p>
+          </div>
 
-                <div>
-                  <label htmlFor="password">
-                    Password <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="password"
-                    type="password"
-                    className="input w-full rounded-lg my-3"
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    required
-                  />
-                </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-base-content mb-2">
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                className="w-full px-4 py-3 bg-base-100 border border-base-300 rounded-lg text-base-content placeholder-base-content/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+                autoComplete="on"
+              />
+            </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary w-full rounded-lg my-3"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Logging in..." : "Log in to Memoir"}
-                </button>
-              </div>
-            </form>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-base-content mb-2">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                className="w-full px-4 py-3 bg-base-100 border border-base-300 rounded-lg text-base-content placeholder-base-content/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
+            </div>
 
-            <div className="text-center text-sm">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 px-6 bg-primary text-primary-content font-medium rounded-lg hover:bg-primary-focus transition-colors duration-200 shadow-sm disabled:opacity-50"
+            >
+              {isLoading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
+
+          <div className="text-center mt-6">
+            <p className="text-base-content/70">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-red-500 hover:font-bold">
+              <Link to="/signup" className="text-primary hover:text-primary-focus font-semibold transition-colors duration-200">
                 Sign up
               </Link>
-            </div>
+            </p>
           </div>
         </div>
       </div>

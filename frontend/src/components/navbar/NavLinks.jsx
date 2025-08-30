@@ -5,21 +5,21 @@ const NavLinks = ({ toggle }) => {
   return (
     <>
       <li onClick={toggle}>
-        <Link to="/">
-          <FaHome />
-          Home
+        <Link to="/" className="hover:bg-base-200 rounded-lg transition-colors duration-200">
+          <FaHome className="text-primary" />
+          <span className="font-medium">Home</span>
         </Link>
       </li>
       <li onClick={toggle}>
-        <Link to="/entries">
-          <FaBookOpen />
-          Your Entries
+        <Link to="/entries" className="hover:bg-base-200 rounded-lg transition-colors duration-200">
+          <FaBookOpen className="text-primary" />
+          <span className="font-medium">Your Entries</span>
         </Link>
       </li>
       <li onClick={toggle}>
-        <Link to="/about">
-          <FaInfo />
-          About
+        <Link to="/about" className="hover:bg-base-200 rounded-lg transition-colors duration-200">
+          <FaInfo className="text-primary" />
+          <span className="font-medium">About</span>
         </Link>
       </li>
     </>

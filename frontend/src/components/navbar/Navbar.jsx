@@ -7,7 +7,7 @@ import logo from "../../assets/logo.svg";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-300 w-full sticky top-0 z-10">
+    <div className="navbar bg-base-100 border-b border-base-300 w-full sticky top-0 z-10">
       <div className="navbar-start">
         <div className="lg:hidden">
           <label
@@ -31,8 +31,10 @@ const Navbar = () => {
           </label>
         </div>
         <Link className="btn btn-ghost text-xl pl-0" to="/">
-          <img className="w-10 h-10" src={logo} alt="logo" />
-                        Memoir
+          <img className="w-8 h-8" src={logo} alt="logo" />
+          <span className="font-bold text-primary">
+            Memoir
+          </span>
         </Link>
       </div>
 

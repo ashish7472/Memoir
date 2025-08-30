@@ -1,9 +1,12 @@
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+    <footer className="footer footer-center p-6 bg-base-200 border-t border-base-300">
       <div>
-        <p>
-          &copy; {new Date().getFullYear()} Memoir | Created with ❤️ by Ashish Rolan
+        <p className="text-base-content/70">
+          &copy; {new Date().getFullYear()} Memoir | Created with ❤️ by{" "}
+          <span className="text-primary font-semibold">
+            Ashish Rolan
+          </span>
         </p>
       </div>
     </footer>

@@ -44,96 +44,99 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-[calc(100svh-64px-52px-40px)]">
-      <div className="my-10">
-        <p className="text-lg font-semibold text-center">
-          Create your Memoir account
-        </p>
-        <p className="text-lg font-semibold text-center">
-          and stay organized effortlessly.
-        </p>
-      </div>
-      <div className="flex justify-center px-7 my-10">
-        <div className="card card-xl bg-base-200 w-full max-w-sm rounded-2xl shadow-xl hover:shadow-2xl">
-          <div className="card-body">
-            <h2 className="card-title block text-center text-lg mb-2">
-              Sign up to Memoir
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
+      <div className="max-w-md w-full">
+        <div className="bg-base-200 rounded-xl p-8 shadow-lg">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-base-content mb-2">Join Memoir</h1>
+            <p className="text-base-content/70">
+              Create your account and start your digital journaling journey
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="firstName" className="block text-sm font-medium text-base-content mb-2">
                   First Name
                 </label>
                 <input
-                  type="text"
                   id="firstName"
+                  type="text"
                   name="firstName"
-                  value={formData.firstName}
+                  className="w-full px-4 py-3 bg-base-100 border border-base-300 rounded-lg text-base-content placeholder-base-content/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                  placeholder="First name"
                   onChange={handleChange}
+                  value={formData.firstName}
                   required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                 />
               </div>
 
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="lastName" className="block text-sm font-medium text-base-content mb-2">
                   Last Name
                 </label>
                 <input
-                  type="text"
                   id="lastName"
+                  type="text"
                   name="lastName"
+                  className="w-full px-4 py-3 bg-base-100 border border-base-300 rounded-lg text-base-content placeholder-base-content/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                  placeholder="Last name"
+                  onChange={handleChange}
                   value={formData.lastName}
-                  onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                 />
               </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-focus focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
-              >
-                {isLoading ? "Creating account..." : "Sign up to Memoir"}
-              </button>
-            </form>
-
-            <div className="text-center text-sm">
-              Already have an account?{" "}
-              <Link to="/login" className="text-red-500 hover:font-bold">
-                Log in
-              </Link>
             </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-base-content mb-2">
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                className="w-full px-4 py-3 bg-base-100 border border-base-300 rounded-lg text-base-content placeholder-base-content/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                placeholder="Enter your email"
+                onChange={handleChange}
+                value={formData.email}
+                required
+                autoComplete="on"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-base-content mb-2">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                className="w-full px-4 py-3 bg-base-100 border border-base-300 rounded-lg text-base-content placeholder-base-content/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                placeholder="Create a password"
+                onChange={handleChange}
+                value={formData.password}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 px-6 bg-primary text-primary-content font-medium rounded-lg hover:bg-primary-focus transition-colors duration-200 shadow-sm disabled:opacity-50"
+            >
+              {isLoading ? "Creating account..." : "Create Account"}
+            </button>
+          </form>
+
+          <div className="text-center mt-6">
+            <p className="text-base-content/70">
+              Already have an account?{" "}
+              <Link to="/login" className="text-primary hover:text-primary-focus font-semibold transition-colors duration-200">
+                Sign in
+              </Link>
+            </p>
           </div>
         </div>
       </div>
