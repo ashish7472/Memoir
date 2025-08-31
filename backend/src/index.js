@@ -11,7 +11,26 @@ const FRONTEND_URL = process.env.FRONTEND_URL || "https://memoirf.netlify.app";
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: FRONTEND_URL, credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://memoirf.netlify.app"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow requests like Postman
+      const cleanOrigin = origin.replace(/\/$/, ""); // strip trailing slash
+      if (allowedOrigins.includes(cleanOrigin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
