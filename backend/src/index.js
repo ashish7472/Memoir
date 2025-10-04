@@ -12,8 +12,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || "https://memoirf.netlify.app";
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://memoirf.netlify.app"
+  "*"
 ];
 
 app.use(
