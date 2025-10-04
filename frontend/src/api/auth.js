@@ -3,40 +3,56 @@ const API_BASE = `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}
 export const authAPI = {
   // Sign up user
   signup: async (userData) => {
-    const response = await fetch(`${API_BASE}/auth/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-      credentials: 'include'
-    });
-    
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Signup failed');
+    try {
+      const response = await fetch(`${API_BASE}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+        credentials: 'include'
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('Signup API Error:', error);
+        throw new Error(error.message || 'Signup failed');
+      }
+      
+      const data = await response.json();
+      console.log('Signup successful:', data);
+      return data;
+    } catch (error) {
+      console.error('Signup fetch error:', error);
+      throw error;
     }
-    
-    return response.json();
   },
 
   // Login user
   login: async (credentials) => {
-    const response = await fetch(`${API_BASE}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-      credentials: 'include'
-    });
-    
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Login failed');
+    try {
+      const response = await fetch(`${API_BASE}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+        credentials: 'include'
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('Login API Error:', error);
+        throw new Error(error.message || 'Login failed');
+      }
+      
+      const data = await response.json();
+      console.log('Login successful:', data);
+      return data;
+    } catch (error) {
+      console.error('Login fetch error:', error);
+      throw error;
     }
-    
-    return response.json();
   },
 
   // Logout user

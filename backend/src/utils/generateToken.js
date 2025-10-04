@@ -7,12 +7,15 @@ const generateToken = (_id, res) => {
   // Determine if we're in production
   const isProduction = process.env.NODE_ENV === 'production';
   
+  // Log for debugging
+  console.log(`Setting cookie - Production: ${isProduction}, Secure: ${isProduction}, SameSite: ${isProduction ? 'None' : 'Lax'}`);
+  
   res.cookie("token", token, {
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     httpOnly: true,
     secure: isProduction, // Only secure in production (HTTPS)
     sameSite: isProduction ? "None" : "Lax", // None for production, Lax for development
-    domain: isProduction ? undefined : undefined, // Let browser handle domain in production
+    path: "/", // Ensure cookie is available for all paths
   });
 };
 

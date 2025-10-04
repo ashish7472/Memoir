@@ -21,14 +21,19 @@ export const UserProvider = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
+      console.log('Checking auth status...');
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/users/me`, {
         credentials: 'include'
       });
       
+      console.log('Auth check response status:', response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log('Auth check successful:', data);
         setUser(data.data);
       } else {
+        console.log('Auth check failed - user not authenticated');
         setUser(null);
       }
     } catch (error) {
@@ -39,8 +44,8 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const login = (userData) => {
-    setUser(userData.data);
+  const login = (response) => {
+    setUser(response.data);
   };
 
   const logout = () => {

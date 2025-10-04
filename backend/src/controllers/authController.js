@@ -119,11 +119,14 @@ const logout = (req, res) => {
   // Determine if we're in production
   const isProduction = process.env.NODE_ENV === 'production';
   
+  console.log(`Clearing cookie - Production: ${isProduction}, Secure: ${isProduction}, SameSite: ${isProduction ? 'None' : 'Lax'}`);
+  
   res.cookie("token", "", {
     expires: new Date(0),
     httpOnly: true,
     secure: isProduction,
     sameSite: isProduction ? "None" : "Lax",
+    path: "/", // Ensure cookie is cleared for all paths
   });
   res.status(200).json({ message: "Logout successfully!" });
 };
