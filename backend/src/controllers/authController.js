@@ -116,7 +116,15 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.cookie("token", null, { expires: new Date(0) });
+  // Determine if we're in production
+  const isProduction = process.env.NODE_ENV === 'production';
+  
+  res.cookie("token", "", {
+    expires: new Date(0),
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "None" : "Lax",
+  });
   res.status(200).json({ message: "Logout successfully!" });
 };
 

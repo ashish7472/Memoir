@@ -19,15 +19,33 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow requests like Postman
-      const cleanOrigin = origin.replace(/\/$/, ""); // strip trailing slash
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      
+      // Clean the origin by removing trailing slash
+      const cleanOrigin = origin.replace(/\/$/, "");
+      
+      // Check if origin is in allowed list
       if (allowedOrigins.includes(cleanOrigin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+      
+      // For production, also allow any subdomain of your domain
+      if (process.env.NODE_ENV === 'production') {
+        const frontendUrl = process.env.FRONTEND_URL || "https://memoirf.netlify.app";
+        const frontendDomain = new URL(frontendUrl).hostname;
+        const originDomain = new URL(origin).hostname;
+        
+        if (originDomain === frontendDomain || originDomain.endsWith('.' + frontendDomain)) {
+          return callback(null, true);
+        }
+      }
+      
+      console.log(`CORS blocked origin: ${origin}`);
+      callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
+    optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   })
 );
 
