@@ -11,7 +11,7 @@ const authMiddleware = async (req, res, next) => {
   }
 
   try {
-    const JWT_SECRET = process.env.JWT_SECRET || "your_default_jwt_secret_key_change_in_production";
+    const JWT_SECRET = process.env.JWT_SECRET || "nillu@5678";
     const decode = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(decode._id);
 
